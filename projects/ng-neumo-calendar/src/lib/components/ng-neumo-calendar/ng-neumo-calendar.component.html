@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="header">
+    <span class="icons" id="prev" (click)="prevMonth()">
+      <i class="fas fa-arrow-left"></i>
+    </span>
+    <span class="month-name">
+      <div id="month">{{currentYear}}</div>
+      <div id="year" class="year">{{currentMonth}}</div>
+    </span>
+    <span class="icons" id="next" (click)="nextMonth()">
+      <i class="fas fa-arrow-right"></i>
+    </span>
+  </div>
+  <div class="divider"></div>
+
+  <div class="calendar-container">
+    <div class="weeks" id="weeks">
+      <span>SUN</span>
+      <span>MON</span>
+      <span>TUE</span>
+      <span>WED</span>
+      <span>THU</span>
+      <span>FRI</span>
+      <span>SAT</span>
+    </div>
+
+    <div class="days" id="days">
+      <span class="day prev" [ngClass]="{'active': prev?.id === selectedDateValue}" *ngFor="let prev of calendar?.prev" [id]="prev?.id">
+        {{prev?.value}}
+      </span>
+      <span class="day" [ngClass]="{'active': current?.id === selectedDateValue}" *ngFor="let current of calendar?.current" [id]="current?.id" (click)="changeSelectedDate(current.id)">
+        {{current?.value}}
+      </span>
+      <span class="day" [ngClass]="{'active': next?.id === selectedDateValue}" class="next" *ngFor="let next of calendar?.next" [id]="next?.id">
+        {{next?.value}}
+      </span>
+    </div>
+  </div>
+</div>

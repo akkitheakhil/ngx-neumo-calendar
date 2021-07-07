@@ -3,5 +3,140 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "ng-neumo-calendar": {
+      "projectType": "library",
+      "root": "projects/ng-neumo-calendar",
+      "sourceRoot": "projects/ng-neumo-calendar/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ng-neumo-calendar/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-neumo-calendar/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ng-neumo-calendar/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-neumo-calendar/src/test.ts",
+            "tsConfig": "projects/ng-neumo-calendar/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-neumo-calendar/karma.conf.js"
+          }
+        }
+      }
+    },
+    "ng-neumo-calendar-test": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/ng-neumo-calendar-test",
+      "sourceRoot": "projects/ng-neumo-calendar-test/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ng-neumo-calendar-test",
+            "index": "projects/ng-neumo-calendar-test/src/index.html",
+            "main": "projects/ng-neumo-calendar-test/src/main.ts",
+            "polyfills": "projects/ng-neumo-calendar-test/src/polyfills.ts",
+            "tsConfig": "projects/ng-neumo-calendar-test/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/ng-neumo-calendar-test/src/favicon.ico",
+              "projects/ng-neumo-calendar-test/src/assets"
+            ],
+            "styles": [
+              "projects/ng-neumo-calendar-test/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/ng-neumo-calendar-test/src/environments/environment.ts",
+                  "with": "projects/ng-neumo-calendar-test/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "ng-neumo-calendar-test:build:production"
+            },
+            "development": {
+              "browserTarget": "ng-neumo-calendar-test:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ng-neumo-calendar-test:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-neumo-calendar-test/src/test.ts",
+            "polyfills": "projects/ng-neumo-calendar-test/src/polyfills.ts",
+            "tsConfig": "projects/ng-neumo-calendar-test/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-neumo-calendar-test/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/ng-neumo-calendar-test/src/favicon.ico",
+              "projects/ng-neumo-calendar-test/src/assets"
+            ],
+            "styles": [
+              "projects/ng-neumo-calendar-test/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "ng-neumo-calendar"
 }
